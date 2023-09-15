@@ -46,7 +46,6 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-//            excludes += "/META-INF/*}"
         }
     }
 }
@@ -70,7 +69,7 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
 
-    //if you want to pass custom http client
+    //if you want to pass custom http client to MetaProbe
     implementation(libs.ktor.android)
     implementation(libs.ktor.core)
 
