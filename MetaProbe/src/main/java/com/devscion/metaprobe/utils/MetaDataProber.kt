@@ -9,30 +9,33 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 
 class MetaDataProber {
 
     suspend fun fetchMetadataSuspend(httpClient: HttpClient, url: String): Result<ProbedData> {
         return try {
-            val httpResponse: HttpResponse = httpClient.get(url)
-            if (httpResponse.status.value == 200) {
-                val html = httpResponse.bodyAsText()
-                val doc = Jsoup.parse(html)
+            withContext(Dispatchers.IO) {
+                val httpResponse: HttpResponse = httpClient.get(url)
+                if (httpResponse.status.value == 200) {
+                    val html = httpResponse.bodyAsText()
+                    val doc = Jsoup.parse(html)
 
-                val title = doc.title()
-                val description = doc.select("meta[name=description]").attr("content")
-                val icon =
-                    doc.select("link[rel=icon]").attr("href").ifEmpty { parseIcon(html, url) }
+                    val title = doc.title()
+                    val description = doc.select("meta[name=description]").attr("content")
+                    val icon =
+                        doc.select("link[rel=icon]").attr("href").ifEmpty { parseIcon(html, url) }
 
-                Result.success(
-                    ProbedData(
-                        title.ifEmpty { null },
-                        description.ifEmpty { null },
-                        icon?.ifEmpty { null })
-                )
-            } else {
-                Result.failure(Exception(MetaProbeError.ParsingError))
+                    Result.success(
+                        ProbedData(
+                            title.ifEmpty { null },
+                            description.ifEmpty { null },
+                            icon?.ifEmpty { null })
+                    )
+                } else {
+                    Result.failure(Exception(MetaProbeError.ParsingError))
+                }
             }
         } catch (e: TimeoutCancellationException) {
             Result.failure(Exception(MetaProbeError.NetworkError))
