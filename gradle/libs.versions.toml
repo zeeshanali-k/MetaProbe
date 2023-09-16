@@ -1,5 +1,6 @@
 [versions]
 agp = "8.1.1"
+kamel-image = "0.7.3"
 org-jetbrains-kotlin-android = "1.8.10"
 core-ktx = "1.12.0"
 junit = "4.13.2"
@@ -13,7 +14,6 @@ jsoup = "1.16.1"
 org-jetbrains-kotlin-jvm = "1.8.10"
 appcompat = "1.6.1"
 material = "1.9.0"
-coil = "2.4.0"
 typist = "1.3.0"
 vaniktech = "0.24.0"
 
@@ -40,7 +40,7 @@ ktor-jvm = { group = "io.ktor", name = "ktor-client-apache5", version.ref = 'kto
 #Jsoup for parsing html
 jsoup = { group = "org.jsoup" , name = "jsoup", version.ref= 'jsoup'}
 #image loading
-coil = {group = "io.coil-kt" , name = "coil-compose" , version.ref = 'coil'}
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel-image" }
 #typist
 typist = {group = "tech.dev-scion" , name = "typist" , version.ref = 'typist'}
 

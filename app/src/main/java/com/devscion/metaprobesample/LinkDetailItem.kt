@@ -28,15 +28,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.devscion.metaprobe.MetaProbe
 import com.devscion.metaprobe.model.ProbedData
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import tech.devscion.typist.Typist
 import tech.devscion.typist.TypistSpeed
 
-private const val TAG = " "
+private const val TAG = "LinkDetailItem"
 
 @Composable
 fun LinkDetailItem(
@@ -138,8 +139,8 @@ fun LinkDetailItem(
                             .clip(RoundedCornerShape(100.dp))
                             .background(Color.White)
                     ) {
-                        AsyncImage(
-                            it.replace(".svg", ".png"),
+                        KamelImage(
+                            asyncPainterResource(data = it),
                             "",
                             modifier = Modifier.size(30.dp)
                         )
