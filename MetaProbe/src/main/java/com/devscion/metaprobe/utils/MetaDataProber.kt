@@ -2,9 +2,10 @@ package com.devscion.metaprobe.utils
 
 import com.devscion.metaprobe.model.MetaProbeError
 import com.devscion.metaprobe.model.ProbedData
-import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
@@ -23,6 +24,7 @@ class MetaDataProber {
                     val doc = Jsoup.parse(html)
 
                     val title = doc.title()
+                    val ogImage = doc.select("meta[property=og:image]").attr("content")
                     val description = doc.select("meta[name=description]").attr("content")
                     val icon =
                         doc.select("link[rel=icon]").attr("href").ifEmpty { parseIcon(html, url) }
@@ -31,7 +33,8 @@ class MetaDataProber {
                         ProbedData(
                             title.ifEmpty { null },
                             description.ifEmpty { null },
-                            icon?.ifEmpty { null })
+                            icon?.ifEmpty { null }, ogImage,
+                        ),
                     )
                 } else {
                     Result.failure(Exception(MetaProbeError.ParsingError))

@@ -29,14 +29,17 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column(
-                        Modifier.padding(20.dp),
+                        Modifier.padding(
+                            vertical = 20.dp,
+                            horizontal = 45.dp
+                        ),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
                         LinkDetailItem("https://stackoverflow.com")
                         Spacer(modifier = Modifier.height(10.dp))
-                        LinkDetailItem("https://github.com")
+                        LinkDetailItem("https://github.com/zeeshanali-k")
                     }
                 }
             }
