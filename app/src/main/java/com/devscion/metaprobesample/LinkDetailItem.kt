@@ -136,14 +136,7 @@ fun LinkDetailItem(
             }
         }
         probedData.value?.let {
-            Column(
-                Modifier
-                    .wrapContentHeight()
-                    .scrollable(
-                        rememberScrollState(),
-                        orientation = Orientation.Vertical
-                    )
-            ) {
+            Column{
                 it.image?.let { img ->
                     Box {
                         KamelImage(
@@ -151,7 +144,7 @@ fun LinkDetailItem(
                             contentDescription = "",
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(260.dp),
+                                .height(300.dp),
                             contentScale = ContentScale.FillBounds
                         )
                         Box(
