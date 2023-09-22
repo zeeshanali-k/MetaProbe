@@ -1,7 +1,11 @@
+[![Maven Central](https://img.shields.io/maven-central/v/tech.dev-scion/metaprobe.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22tech.dev-scion%22%20AND%20a:%22metaprobe%22)
+
 # MetaProbe
 A simple Android Kotlin library for fetching link details like Title, Description, Icon and OG Image effortlessly based on <a href="https://ktor.io/docs/">Ktor</a> for fetching HTML from provided URL and <a href="https://github.com/jhy/jsoup">Jsoup</a> for parsing Meta Data. The usecase of this library could be seen in Social Media and Messaging Apps. 
 
 For Kotlin Multiplatform Check <a href="https://github.com/zeeshanali-k/MetaProbeKMP">MetaProbeKMP</a>
+
+<img src="/imgs/ss_1.png" height="300px">
 
 
 ## Usage
